@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Stackly</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/pages.css">
+<style>
+
+</style>
+</head>
+<body>
+<div class="preloader" id="preloader">
+  <div class="pl-mark">
+    <div class="pl-ring"></div>
+    <div class="pl-ring2"></div>
+    <img src="assets/logo.webp" alt="Stackly">
+  </div>
+  <div class="pl-bar"><span></span></div>
+  <div class="pl-label">Loading system</div>
+</div>
+
+
+<header>
+  <nav class="wrap">
+    <a class="logo" href="index.html">
+      <img class="logo-img" src="assets/logo.webp" alt="Stackly" width="132" height="40">
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html" style="opacity:1" aria-current="page">Services</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a class="login" href="login.html">Login</a>
+      <a class="nav-cta" href="contact.html">Talk to an Engineer</a>
+    </div>
+    <div class="burger" id="burgerBtn"><span></span><span></span><span></span></div>
+  </nav>
+</header>
+
+<div class="mobile-nav-scrim" id="mobileNavScrim"></div>
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a class="login" href="login.html">Login</a>
+  <a class="nav-cta" href="contact.html">Talk to an Engineer</a>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('assets/photos/cnc-aisle.webp');"></div>
+  <div class="wrap">
+  <div class="glow"><span id="glow-svc-hero" style="width:480px;height:480px;background:#E1512B;top:-140px;left:65%;"></span></div>
+    <div class="crumb"><a href="index.html">Home</a> / Services</div>
+    <h1 class="reveal-up">ONE SYSTEM. EVERY LAYER OF PRODUCTION.</h1>
+    <div class="page-hero-meta">
+      <p class="reveal-up">Six modules, one operating layer, deployed on your timeline — not a full re-platform of your factory on day one.</p>
+      <div class="page-hero-actions">
+        <a class="btn btn-dark" href="contact.html">Talk to an Engineer</a>
+        <a class="btn btn-ghost" href="services.html#pricing">See Pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="modules">
+  <div class="wrap">
+    <div class="glow"><span id="glow-services-stats" style="width:460px;height:460px;background:#4B5A44;top:-10%;right:0%;"></span></div>
+    <div class="eyebrow">THE SIX MODULES</div>
+    <h2 class="reveal-up">One operating layer, six things it actually does.</h2>
+    <p class="modules-sub">Deploy one module or all six — each runs on the same live data model, so nothing gets rebuilt when you add the next.</p>
+    <div class="module-grid reveal-group">
+      <div class="module-card">
+        <div class="m-idx">01</div>
+        <div class="m-name">Production Intelligence</div>
+        <p class="m-desc">Live line status, OEE and throughput in one view, pulled straight from PLCs and MES — no manual logging.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-idx">02</div>
+        <div class="m-name">Predictive Maintenance</div>
+        <p class="m-desc">Flags drift before it becomes downtime, using signal from equipment you already have on the floor.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-idx">03</div>
+        <div class="m-name">Quality &amp; Traceability</div>
+        <p class="m-desc">Full genealogy from raw material to shipped unit, with scrap and rework caught shifts earlier.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-idx">04</div>
+        <div class="m-name">Supply Chain Visibility</div>
+        <p class="m-desc">Connects plant-floor signal to inbound and outbound flow, so shortages show up before they stall a line.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-idx">05</div>
+        <div class="m-name">Energy Optimization</div>
+        <p class="m-desc">Benchmarks energy per unit, not per hour, and surfaces where usage is drifting from baseline.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-idx">06</div>
+        <div class="m-name">Workforce &amp; Scheduling</div>
+        <p class="m-desc">Matches shift staffing to real demand and routes alerts to whoever's actually on the floor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="flow">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center">HOW A DEPLOYMENT WORKS</div>
+    <h2>Three steps. Weeks, not quarters.</h2>
+    <div class="flow-row" style="margin-top:20px;">
+      <div class="flow-card raw"><div class="tag fx-float">Step 01</div><div class="txt">Connect your fleet — MES, ERP, PLCs and sensors, legacy or modern.</div></div>
+      <div class="flow-arrow fx-float"><svg class="mi-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="flow-card intel"><div class="tag fx-float">Step 02</div><div class="txt">See it in one place — a live model of the line goes up within days.</div></div>
+      <div class="flow-arrow fx-float"><svg class="mi-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="flow-card action"><div class="tag fx-float">Step 03</div><div class="txt">Act on live signal — alerts and recommendations route to the right shift.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="split">
+  <div class="wrap split-grid">
+    <div>
+      <div class="eyebrow">BUILT FOR YOUR PRODUCTION REALITY</div>
+      <h2 class="reveal-up">Legacy PLCs. Modern MES. One model.</h2>
+      <div class="feature-list">
+        <div class="feature-row"><div class="label">Legacy-Ready</div><div class="val">Connects to equipment running protocols from the last two decades, not just the last two years.</div></div>
+        <div class="feature-row"><div class="label">Vendor-Neutral</div><div class="val">Works across mixed fleets — no requirement to standardize on one machine vendor first.</div></div>
+        <div class="feature-row"><div class="label">Elastic</div><div class="val">Scales from one line to a global network without re-architecting the deployment.</div></div>
+      </div>
+    </div>
+    <div class="split-media">
+      <img loading="lazy" src="assets/photos/wheel-line.webp" alt="Multi-vendor production floor">
+      <div class="caption">MULTI-VENDOR FLEET / LIVE</div>
+    </div>
+  </div>
+</section>
+
+<section class="whole">
+  <div class="wrap">
+    <div class="eyebrow">HOW ENGAGEMENTS ARE STRUCTURED</div>
+    <h2 class="reveal-up">Three shapes of engagement, same underlying system.</h2>
+    <div class="grid-3">
+      <div class="cell"><div class="tag">Shape 01</div><div class="big">Operational Audit</div><p style="font-size:13px;color:var(--ink-soft);margin-top:8px;">A two-week read on where signal is missing before you commit to anything.</p></div>
+      <div class="cell dark"><div class="tag">Shape 02</div><div class="big">Facility Rollout</div><p style="font-size:13px;color:rgba(255,255,255,0.75);margin-top:8px;">Full deployment across one facility, live within four to eight weeks.</p></div>
+      <div class="cell"><div class="tag">Shape 03</div><div class="big">Multi-Site Network</div><p style="font-size:13px;color:var(--ink-soft);margin-top:8px;">A phased rollout across your full network with a shared data model.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="visibility">
+  <div class="wrap vis-grid">
+    <div>
+      <div class="eyebrow">CASE IN POINT</div>
+      <h2 class="reveal-up">25.6 points of visibility, one deployment.</h2>
+      <div class="compare">
+        <div class="compare-track"><div class="compare-fill" id="compare-fill" data-fill="96.8%"></div></div>
+        <div class="compare-labels">
+          <div><div class="num" data-count="71.2" data-suffix="%">0%</div><div class="lab">Before</div></div>
+          <div style="text-align:right;"><div class="num" data-count="96.8" data-suffix="%">0%</div><div class="lab">After</div></div>
+        </div>
+      </div>
+      <p class="vis-desc">A nine-site automotive supplier went from partial visibility on three lines to near-complete coverage across the network in one quarter.</p>
+      <a class="read-link" href="blog.html">Read the case study <svg class="mi-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="vis-media">
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Refinery%20002.JPG?width=800" alt="Multi-site facility at night">
+      <div class="caption">MULTI-SITE / NIGHT SHIFT</div>
+    </div>
+  </div>
+</section>
+
+<section class="integrations">
+  <div class="wrap">
+    <div class="eyebrow">INTEGRATIONS</div>
+    <h2 class="reveal-up">Connects to what you already run.</h2>
+    <div class="int-grid reveal-group">
+      <div class="int-card"><div class="int-mark">SA</div><div class="int-name">SAP</div><div class="int-cat">ERP</div></div>
+      <div class="int-card"><div class="int-mark">SO</div><div class="int-name">Siemens Opcenter</div><div class="int-cat">MES</div></div>
+      <div class="int-card"><div class="int-mark">RF</div><div class="int-name">Rockwell FactoryTalk</div><div class="int-cat">MES</div></div>
+      <div class="int-card"><div class="int-mark">MO</div><div class="int-name">Modbus / OPC-UA</div><div class="int-cat">PROTOCOL</div></div>
+      <div class="int-card"><div class="int-mark">IG</div><div class="int-name">Ignition SCADA</div><div class="int-cat">SCADA</div></div>
+      <div class="int-card"><div class="int-mark">OR</div><div class="int-name">Oracle ERP</div><div class="int-cat">ERP</div></div>
+      <div class="int-card"><div class="int-mark">AB</div><div class="int-name">Allen-Bradley</div><div class="int-cat">PLC</div></div>
+      <div class="int-card"><div class="int-mark">MI</div><div class="int-name">Mitsubishi PLCs</div><div class="int-cat">PLC</div></div>
+      <div class="int-card"><div class="int-mark">SF</div><div class="int-name">Salesforce</div><div class="int-cat">CRM</div></div>
+      <div class="int-card"><div class="int-mark">SN</div><div class="int-name">Snowflake</div><div class="int-cat">DATA WAREHOUSE</div></div>
+      <div class="int-card"><div class="int-mark">RM</div><div class="int-name">Custom REST / MQTT</div><div class="int-cat">API</div></div>
+      <div class="int-card int-card-more"><div class="int-mark">+</div><div class="int-name">Your Legacy Stack</div><div class="int-cat">ASK US</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+  <div class="glow"><span id="glow-svc-pricing" style="width:440px;height:440px;background:#F17A4F;top:-60px;right:0%;"></span></div>
+    <div class="eyebrow">HOW IT'S PRICED</div>
+    <h2 class="reveal-up">Priced by facility, not by seat.</h2>
+    <p class="pricing-sub">Every tier includes the full six-module system — the difference is scale, support and how many sites you're running.</p>
+    <div class="price-grid reveal-group">
+      <div class="price-card">
+        <div class="p-tag">Single Site</div><div class="p-name">Operational Audit</div>
+        <div class="p-price">Fixed fee<span> / 2 weeks</span></div>
+        <div class="p-desc">A scoped read on one facility before any long-term commitment.</div>
+        <div class="price-list"><div>One facility, up to 3 lines</div><div>Signal-gap report</div><div>Deployment roadmap</div></div>
+        <a class="btn btn-ghost" href="contact.html">Book an Audit</a>
+      </div>
+      <div class="price-card feat">
+        <div class="price-badge">Most Common</div>
+        <div class="p-tag">Facility Rollout</div><div class="p-name">Full Deployment</div>
+        <div class="p-price">Custom<span> / per facility</span></div>
+        <div class="p-desc">The complete operating layer, live across one facility.</div>
+        <div class="price-list"><div>All six modules</div><div>Unlimited lines, one site</div><div>24/7 monitoring desk</div><div>Dedicated deployment engineer</div></div>
+        <a class="btn btn-solid" href="contact.html">Talk to an Engineer</a>
+      </div>
+      <div class="price-card">
+        <div class="p-tag">Multi-Site</div><div class="p-name">Global Network</div>
+        <div class="p-price">Custom<span> / network</span></div>
+        <div class="p-desc">A phased rollout across your full facility network.</div>
+        <div class="price-list"><div>All six modules</div><div>Shared cross-site data model</div><div>Network-level benchmarking</div><div>Named account team</div></div>
+        <a class="btn btn-ghost" href="contact.html">Talk to Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sla">
+  <div class="wrap">
+    <div class="eyebrow">SECURITY &amp; COMPLIANCE</div>
+    <h2 class="reveal-up" style="font-size:clamp(24px,3.4vw,34px);margin-bottom:36px;">Held to the same standard as the plants we run on.</h2>
+    <div class="sla-grid reveal-group">
+      <div class="sla-card"><div class="num">SOC 2</div><div class="lab">Type II Audited</div></div>
+      <div class="sla-card"><div class="num">ISO<br>27001</div><div class="lab">Certified ISMS</div></div>
+      <div class="sla-card"><div class="num" data-count="99.97" data-suffix="%">0%</div><div class="lab">Contracted Uptime</div></div>
+      <div class="sla-card"><div class="num">SSO</div><div class="lab">Ready, Day One</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="notes">
+  <div class="wrap">
+    <div class="notes-head">
+      <h3 class="reveal-up">Case studies from the floor.</h3>
+      <p>Real deployments, real before-and-after numbers.</p>
+    </div>
+    <div class="notes-grid">
+      <a class="note-feature" href="blog.html">
+        <img loading="lazy" src="assets/photos/welder-sparks.webp" alt="Heavy industry welding">
+        <div class="tag">HEAVY INDUSTRY</div>
+        <div class="title">Cutting unplanned downtime 31% across nine forging lines</div>
+      </a>
+      <div class="note-side">
+        <a class="note-small" href="blog.html"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Electronics%20factory%20in%20Shenzhen.jpg?width=300" alt="Electronics line"><div><div class="tag">ELECTRONICS</div><div class="title">Quality drift caught three shifts earlier</div></div></a>
+        <a class="note-small" href="blog.html"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ayursun%20Pharma%20Blister%20machine%20division.jpg?width=300" alt="Pharma line"><div><div class="tag">PHARMA</div><div class="title">Full traceability across a five-site network</div></div></a>
+        <a class="note-small" href="blog.html"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/HESA%20Kowsar%20production%20line.jpg?width=300" alt="Aerospace line"><div><div class="tag">AEROSPACE</div><div class="title">Energy use down 14% without slowing output</div></div></a>
+        <a class="note-small" href="blog.html"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/The%20processing%20plant%20at%20Lakota%20Foods%20%2815690553980%29.jpg?width=300" alt="Food plant"><div><div class="tag">FOOD</div><div class="title">Workforce scheduling matched to real demand</div></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <div class="faq-box">
+      <h2>Not sure where to start?</h2>
+      <div class="faq-item open">
+        <div class="faq-q"><span>Do I need to replace my existing MES or ERP?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>No — Stackly sits alongside what you already run and pulls signal from it, rather than replacing it.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>How long before we see anything live?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>Most single-line pilots go live within days of connection; full-facility rollouts typically land in four to eight weeks.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Does this work with equipment older than ten years?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>Yes — a large share of our connected fleet is legacy hardware running older industrial protocols.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>What does a typical audit cost?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>It's a fixed fee, scoped to your facility during the first call — see the Operational Audit tier above.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 class="reveal-up">NOT SURE WHERE TO START?</h2>
+  <div class="glow"><span id="glow-svc-final" style="width:600px;height:600px;background:#fff;top:-200px;left:50%;transform:translateX(-50%);"></span></div>
+    <p>Tell us a bit about your setup and we'll recommend the right entry point.</p>
+    <div class="final-actions">
+      <a class="btn btn-solid" href="contact.html">Talk to an Engineer</a>
+      <a class="btn btn-outline" href="services.html#pricing">See Pricing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-logo">
+        <a href="index.html" aria-label="Stackly home"><img class="logo-img" src="assets/logo.webp" alt="Stackly" width="140" height="42"></a>
+        <span>Manufacturing Intelligence</span>
+        <div class="foot-social">
+          <a href="404.html" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="404.html" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="0.9" fill="var(--paper)" stroke="none"/></svg></a>
+          <a href="404.html" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="3"/><path d="M7.3 10v6.5M7.3 7.2v.01"/><path d="M11 16.5V12a2.2 2.2 0 0 1 4.4 0v4.5M11 12.5v4"/></svg></a>
+          <a href="404.html" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>
+        <div class="foot-col"><h4>Solutions</h4><a href="services.html">Production</a><a href="services.html">Maintenance</a><a href="services.html">Quality</a><a href="services.html">Supply Chain</a><a href="services.html">Energy</a></div>
+        <div class="foot-col"><h4>Industries</h4><a href="services.html">Automotive</a><a href="services.html">Electronics</a><a href="services.html">Aerospace</a><a href="services.html">Pharma</a><a href="services.html">Heavy Industry</a></div>
+        <div class="foot-col"><h4>Resources</h4><a href="blog.html">Factory Notes</a><a href="blog.html">Case Studies</a><a href="blog.html">Insights</a></div>
+      </div>
+    </div>
+    <div class="foot-newsletter foot-newsletter-bottom">
+      <div class="fnb-text">
+        <h4>Stay in the loop</h4>
+        <p>Factory Notes and product updates, once or twice a month. No spam, unsubscribe any time.</p>
+      </div>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="you@company.com" aria-label="Email address" required>
+        <button type="submit" class="btn btn-dark">Subscribe</button>
+      </form>
+      <div class="newsletter-note" id="newsletterNote"></div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 Stackly. All rights reserved.</p>
+      <div class="foot-bottom-links">
+        <a href="404.html">Privacy Policy</a>
+        <a href="404.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="assets/site.js"></script>
+
+</body>
+</html>

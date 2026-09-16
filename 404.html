@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signal lost — Stackly</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161512; --cream:#F4EEE1; --coral:#E1512B; --coral-soft:#F17A4F;
+    --mono:'IBM Plex Mono', monospace; --display:'Archivo Black', sans-serif; --body:'Inter', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--ink); color:var(--cream); font-family:var(--body);
+    min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:32px; text-align:center; overflow:hidden; position:relative;
+  }
+  a{ color:inherit; text-decoration:none; }
+  body::before{
+    content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background-image:linear-gradient(rgba(244,238,225,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(244,238,225,0.05) 1px, transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(circle at 50% 35%, #000 0%, transparent 70%);
+  }
+  .logo, .code, .bignum, .readout, h1, p, .actions, .path-note{ position:relative; z-index:1; }
+  .logo{ position:absolute; top:32px; left:32px; height:24px; opacity:0.85; }
+  .code{ font-family:var(--mono); font-size:12px; letter-spacing:0.08em; color:var(--coral-soft); }
+
+  /* giant glitching 404 numeral */
+  .bignum{
+    position:relative; font-family:var(--display); font-size:clamp(120px, 28vw, 320px);
+    line-height:0.85; letter-spacing:-0.02em; color:var(--cream); margin-top:18px;
+    -webkit-text-stroke:1px rgba(244,238,225,0.15);
+  }
+  .bignum span{ color:var(--coral); }
+  .bignum::before, .bignum::after{
+    content:'404'; position:absolute; inset:0; overflow:hidden;
+  }
+  .bignum::before{ color:var(--coral-soft); left:3px; opacity:0.65; animation:glitch1 3.4s infinite linear; }
+  .bignum::after{ color:#8FA9C9; left:-3px; opacity:0.55; animation:glitch2 3.9s infinite linear; }
+  @keyframes glitch1{
+    0%,89%,100%{ clip-path:inset(0 0 0 0); transform:translate(0,0); }
+    90%{ clip-path:inset(10% 0 62% 0); transform:translate(-6px,2px); }
+    92%{ clip-path:inset(48% 0 20% 0); transform:translate(6px,-2px); }
+    94%{ clip-path:inset(70% 0 5% 0); transform:translate(-4px,1px); }
+    96%{ clip-path:inset(0 0 0 0); transform:translate(0,0); }
+  }
+  @keyframes glitch2{
+    0%,91%,100%{ clip-path:inset(0 0 0 0); transform:translate(0,0); }
+    93%{ clip-path:inset(20% 0 40% 0); transform:translate(5px,-1px); }
+    95%{ clip-path:inset(60% 0 8% 0); transform:translate(-5px,2px); }
+    97%{ clip-path:inset(2% 0 80% 0); transform:translate(3px,-2px); }
+  }
+  .readout{ width:min(560px, 90vw); height:120px; margin:20px 0 8px; }
+  .readout path{ fill:none; stroke:var(--coral-soft); stroke-width:2; }
+  .readout .flatline{ stroke:rgba(244,238,225,0.25); }
+  h1{
+    font-family:var(--display); font-size:clamp(24px, 4vw, 34px); text-transform:uppercase;
+    letter-spacing:-0.01em; line-height:1; margin-top:6px;
+  }
+  p{ font-size:15px; color:rgba(244,238,225,0.7); max-width:420px; margin:18px auto 0; line-height:1.6; }
+  .actions{ display:flex; gap:14px; justify-content:center; margin-top:34px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:100px;
+    font-size:14px; font-weight:600; transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, background .3s ease, color .3s ease;
+  }
+  .btn-solid{ background:var(--coral); color:#fff; }
+  .btn-solid:hover{ transform:translateY(-3px); box-shadow:0 14px 28px rgba(225,81,43,0.35); }
+  .btn-outline{ border:1px solid rgba(244,238,225,0.3); color:var(--cream); }
+  .btn-outline:hover{ background:rgba(244,238,225,0.08); transform:translateY(-3px); }
+  .path-note{ margin-top:52px; font-family:var(--mono); font-size:11px; color:rgba(244,238,225,0.35); }
+  .path-note span{ color:var(--coral-soft); }
+  @media (prefers-reduced-motion: reduce){ * { animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body>
+
+<a class="logo" href="index.html"><img src="assets/logo.webp" alt="Stackly" height="24"></a>
+
+<div class="code">ERROR / NO DATA</div>
+
+<div class="bignum">4<span>0</span>4</div>
+
+<svg class="readout" viewBox="0 0 560 120" preserveAspectRatio="none">
+  <path class="flatline" d="M0 60 L560 60"/>
+  <path id="signal" d=""/>
+</svg>
+
+<h1>Signal lost.</h1>
+<p>This page isn't broadcasting. The link may be wrong, or it's been moved to somewhere else in the system.</p>
+
+<div class="actions">
+  <a class="btn btn-solid" href="index.html">Back to homepage</a>
+  <a class="btn btn-outline" href="javascript:void(0)" id="goBackBtn">Go back</a>
+</div>
+
+<div class="path-note">Last known route: <span id="badpath">/unknown</span></div>
+
+<script>
+  document.getElementById('badpath').textContent = location.pathname.split('/').pop() || '/unknown';
+
+  // "Go back" returns to whatever page sent the visitor here.
+  // Falls back to the homepage if there's no previous page to return to
+  // (e.g. the visitor landed here directly with no browser history).
+  document.getElementById('goBackBtn').addEventListener('click', ()=>{
+    if (history.length > 1) {
+      history.back();
+    } else {
+      window.location.href = 'index.html';
+    }
+  });
+
+  // One orchestrated moment: a live signal spikes, then flatlines into "no data"
+  const w = 560, mid = 60;
+  function buildPath(points){
+    const step = w / (points.length - 1);
+    return points.map((y,i)=> (i===0?'M':'L') + (i*step).toFixed(1) + ' ' + y.toFixed(1)).join(' ');
+  }
+  const active = [mid,52,68,40,78,30,85,45,60,55,65,mid];
+  const flat = new Array(active.length).fill(mid);
+
+  const el = document.getElementById('signal');
+  const activeD = buildPath(active);
+  const flatD = buildPath(flat);
+
+  el.setAttribute('d', activeD);
+  const len = el.getTotalLength();
+  el.style.strokeDasharray = len;
+  el.style.strokeDashoffset = len;
+  el.style.transition = 'stroke-dashoffset 1.1s cubic-bezier(.4,0,.2,1)';
+  requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ el.style.strokeDashoffset = '0'; }); });
+
+  setTimeout(()=>{
+    el.style.transition = 'd 0.9s cubic-bezier(.4,0,.2,1), opacity 0.9s ease';
+    el.setAttribute('d', flatD);
+    el.style.opacity = '0.4';
+  }, 1400);
+</script>
+</body>
+</html>

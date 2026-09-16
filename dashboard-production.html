@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Stackly — Production Intelligence</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="stylesheet" href="assets/dashboard.css">
+<link rel="stylesheet" href="assets/dashboard-production-theme.css">
+</head>
+<body>
+
+<div class="sidebar-scrim" id="sidebarScrim"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <a class="sidebar-logo" href="index.html" id="sidebarLogo"><img src="assets/logo.webp" alt="Stackly" width="120" height="36"></a>
+  </div>
+  <!-- nav injected by dashboard.js -->
+  <div class="sidebar-foot">
+    <div class="sidebar-user">
+      <div class="u-avatar" id="sidebarAvatar">DP</div>
+      <div><div class="u-name" id="sidebarUserName">Dinesh Patel</div><div class="u-role">Plant Operations</div></div>
+    </div>
+    <button class="sidebar-logout js-logout" type="button">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      <span>Log Out</span>
+    </button>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <img class="topbar-logo" src="assets/logo.webp" alt="Stackly" width="96" height="29">
+      </div>
+      <div class="topbar-title">
+        <h1 id="sectionTitle">Overview</h1>
+        <p id="sectionSub">Production Intelligence</p>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-user">
+          <div class="topbar-avatar" id="topbarAvatar">DP</div>
+          <div class="topbar-user-text"><span class="tw-hello">Welcome back</span><span class="tw-name" id="topbarName">Dinesh Patel</span></div>
+        </div>
+        <button class="menu-toggle" type="button"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.6"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div id="section-root"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.STACKLY_CONFIG = {
+  title: "Stackly — Production Intelligence",
+  subtitle: "Production Intelligence",
+  menus: [
+    { id:'overview', label:'Overview', icon:'overview' },
+    { id:'lines', label:'Lines', icon:'grid', count:20 },
+    { id:'quality', label:'Quality', icon:'check' },
+    { id:'downtime', label:'Downtime', icon:'bolt', count:3 },
+    { id:'energy', label:'Energy', icon:'leaf' },
+    { id:'reports', label:'Shift Reports', icon:'clipboard' },
+    { id:'compliance', label:'Compliance', icon:'shield', count:2 }
+  ],
+  data: {
+    overview: [
+      { type:'stat', title:'Throughput', meta:'Line 04', value:12.8, suffix:'%', plus:true, delta:'+12.8% vs last week', deltaDir:'up', series:[61,64,63,70,68,74,78] },
+      { type:'stat', title:'First-pass yield', meta:'Plant-wide', value:99.4, suffix:'%', delta:'+0.3pt vs target', deltaDir:'up', series:[98.8,99.0,99.1,99.0,99.2,99.3,99.4] },
+      { type:'gauge', title:'Shift capacity', value:78, display:'78%', sub:'Operators scheduled vs required' },
+      { type:'stat', title:'Active alerts', meta:'Live', value:9, suffix:'', delta:'3 critical, 6 warning', deltaDir:'down', series:[14,13,11,12,10,9,9] },
+      { type:'trend', title:'Output — all lines', meta:'units / hour', series:[420,435,410,460,455,480,500], labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'] },
+      { type:'donut', title:'Output share by line', meta:'today', items:[
+        {label:'Line 04', value:512, display:'512 u/h'},
+        {label:'Line 01', value:498, display:'498 u/h'},
+        {label:'Line 02', value:480, display:'480 u/h'},
+        {label:'Line 03', value:455, display:'455 u/h'},
+        {label:'Line 05', value:440, display:'440 u/h'} ] },
+      { type:'alerts', title:'Live signals', meta:'plant-wide', items:[
+        {level:'crit', text:'Asset 27 downtime spike detected', time:'2 min ago'},
+        {level:'warn', text:'Line 04 changeover running long', time:'18 min ago'},
+        {level:'info', text:'Quality drift within tolerance on Line 02', time:'41 min ago'},
+        {level:'warn', text:'Energy demand approaching peak cap', time:'1 hr ago'} ] },
+      { type:'rank', title:'Top performing shifts', meta:'this week', items:[
+        {label:'Shift A — Mon-Fri', value:'512 u/h avg'}, {label:'Shift B — Mon-Fri', value:'487 u/h avg'},
+        {label:'Shift C — Weekend', value:'441 u/h avg'} ] }
+    ],
+    lines: [
+      { type:'stat', title:'Active lines', meta:'of 20', value:18, suffix:'', delta:'2 in changeover', deltaDir:'down', series:[16,17,17,18,18,17,18] },
+      { type:'stat', title:'Line 04 throughput', meta:'today', value:12.8, suffix:'%', delta:'above target', deltaDir:'up', series:[58,60,63,66,70,74,78] },
+      { type:'gauge', title:'Line 04 utilization', value:87, display:'87%', sub:'Scheduled runtime used' },
+      { type:'stat', title:'Avg cycle time', meta:'Line 04', value:38, suffix:'s', delta:'-2.1s vs baseline', deltaDir:'up', series:[42,41,40,40,39,38,38] },
+      { type:'bars', title:'Output by line', meta:'units / hour, today', items:[
+        {label:'Line 04', value:512, display:'512'},
+        {label:'Line 01', value:498, display:'498'},
+        {label:'Line 02', value:480, display:'480'},
+        {label:'Line 03', value:455, display:'455'},
+        {label:'Line 05', value:6, display:'—'} ] },
+      { type:'timeline', title:'Changeover schedule', meta:'today', items:[
+        {time:'06:00', label:'Line 01 — shift start, running', state:'done'},
+        {time:'09:40', label:'Line 03 — changeover in progress', state:'active'},
+        {time:'11:15', label:'Line 03 — resume production', state:'pending'},
+        {time:'14:00', label:'Line 05 — scheduled changeover', state:'pending'} ] },
+      { type:'tablecard', title:'Line status', meta:'live', cols:['Line','Shift','Output','State'],
+        rows:[
+          ['Line 01','A','498 u/h','<span class="status-pill ok">Running</span>'],
+          ['Line 02','A','480 u/h','<span class="status-pill ok">Running</span>'],
+          ['Line 03','A','455 u/h','<span class="status-pill warn">Changeover</span>'],
+          ['Line 04','A','512 u/h','<span class="status-pill ok">Running</span>'],
+          ['Line 05','A','—','<span class="status-pill crit">Stopped</span>'] ] },
+      { type:'metrics', title:'Changeover performance', meta:'trailing 30 days', items:[
+        {label:'Avg. changeover time', value:'22 min'}, {label:'Fastest changeover', value:'11 min'}, {label:'Changeovers this month', value:'46'} ] }
+    ],
+    quality: [
+      { type:'stat', title:'First-pass yield', meta:'plant-wide', value:99.4, suffix:'%', delta:'+0.3pt vs target', deltaDir:'up', series:[98.8,99.0,99.1,99.0,99.2,99.3,99.4] },
+      { type:'stat', title:'Defect rate', meta:'7-day', value:0.6, suffix:'%', delta:'-0.2pt vs last week', deltaDir:'up', series:[1.0,0.9,0.8,0.9,0.7,0.6,0.6] },
+      { type:'gauge', title:'Quality drift', value:8, display:'0.8%', sub:'Within acceptable range' },
+      { type:'stat', title:'Batches inspected', meta:'today', value:214, suffix:'', delta:'6 flagged', deltaDir:'down', series:[180,190,200,205,198,210,214] },
+      { type:'heatstrip', title:'Defect rate — 7 days', meta:'% of output', items:[
+        {label:'Mon', value:100}, {label:'Tue', value:90}, {label:'Wed', value:80},
+        {label:'Thu', value:90}, {label:'Fri', value:70}, {label:'Sat', value:60}, {label:'Sun', value:60} ] },
+      { type:'donut', title:'Defects by station', meta:'this week', items:[
+        {label:'Assembly', value:38, display:'38'}, {label:'Welding', value:26, display:'26'},
+        {label:'Coating', value:19, display:'19'}, {label:'Packaging', value:11, display:'11'} ] },
+      { type:'tablecard', title:'Recent inspections', meta:'live', cols:['Batch','Result','Inspector','Time'],
+        rows:[
+          ['B-4471','<span class="status-pill ok">Pass</span>','A. Kessler','09:14'],
+          ['B-4472','<span class="status-pill warn">Review</span>','M. Osei','09:26'],
+          ['B-4473','<span class="status-pill ok">Pass</span>','A. Kessler','09:41'],
+          ['B-4474','<span class="status-pill crit">Fail</span>','R. Fenn','09:58'] ] },
+      { type:'progress', title:'Corrective actions', meta:'status', items:[
+        {label:'CAPA-118 — Welding station calibration', value:85}, {label:'CAPA-119 — Coating line moisture check', value:60},
+        {label:'CAPA-120 — Packaging seal audit', value:35} ] }
+    ],
+    downtime: [
+      { type:'stat', title:'Downtime', meta:'Asset 27', value:-31, suffix:'%', delta:'vs last month', deltaDir:'up', series:[45,40,38,34,30,29,31] },
+      { type:'stat', title:'MTTR', meta:'mean time to repair', value:42, suffix:'m', delta:'-6m vs baseline', deltaDir:'up', series:[54,52,50,48,45,44,42] },
+      { type:'gauge', title:'Recovery this week', value:76, display:'76%', sub:'Of stoppages resolved' },
+      { type:'stat', title:'Open stoppages', meta:'live', value:2, suffix:'', delta:'1 critical', deltaDir:'down', series:[5,4,4,3,3,2,2] },
+      { type:'metrics', title:'Downtime by cause', meta:'this week, minutes', items:[
+        {label:'Mechanical fault', value:54, suffix:'m', delta:'Asset 27 bearing', deltaDir:'down'},
+        {label:'Material feed', value:31, suffix:'m', delta:'Line 05', deltaDir:'down'},
+        {label:'Changeover overrun', value:22, suffix:'m', delta:'Line 03', deltaDir:'down'},
+        {label:'Electrical', value:9, suffix:'m', delta:'resolved', deltaDir:'up'} ] },
+      { type:'timeline', title:'Stoppage timeline', meta:'today', items:[
+        {time:'08:12', label:'Asset 27 — bearing fault detected', state:'done'},
+        {time:'08:24', label:'Technician dispatched', state:'done'},
+        {time:'10:05', label:'Line 05 — waiting on material feed', state:'active'},
+        {time:'—', label:'Asset 27 — repair verification', state:'pending'} ] },
+      { type:'alerts', title:'Active stoppages', meta:'live', items:[
+        {level:'crit', text:'Asset 27 — bearing fault, technician dispatched', time:'12 min ago'},
+        {level:'warn', text:'Line 05 — waiting on material feed', time:'34 min ago'} ] }
+    ],
+    energy: [
+      { type:'stat', title:'Consumption', meta:'plant-wide', value:-14.2, suffix:'%', delta:'vs baseline', deltaDir:'up', series:[112,108,104,100,96,92,88] },
+      { type:'stat', title:'Peak demand', meta:'today', value:82, suffix:'%', delta:'of contracted cap', deltaDir:'down', series:[70,74,76,79,80,81,82] },
+      { type:'gauge', title:'Efficiency target', value:64, display:'64%', sub:'Of quarterly goal reached' },
+      { type:'stat', title:'Cost avoided', meta:'this month', value:18.4, suffix:'K', prefix:'$', delta:'vs last quarter', deltaDir:'up', series:[8,10,12,14,15,17,18] },
+      { type:'tablecard', title:'Shift energy log', meta:'today', cols:['Shift','Peak load','Avg load','Status'],
+        rows:[
+          ['A (06:00)','79%','68%','<span class="status-pill ok">Normal</span>'],
+          ['B (14:00)','82%','74%','<span class="status-pill warn">Near cap</span>'],
+          ['C (22:00)','61%','52%','<span class="status-pill ok">Normal</span>'] ] },
+      { type:'rank', title:'Energy by line', meta:'MWh this week', items:[
+        {label:'Line 01', value:24, display:'24 MWh'}, {label:'Line 02', value:21, display:'21 MWh'},
+        {label:'Line 04', value:19, display:'19 MWh'}, {label:'Line 03', value:16, display:'16 MWh'} ] },
+      { type:'progress', title:'Efficiency initiatives', meta:'targets', items:[
+        {label:'LED retrofit — Plant 02', value:100}, {label:'Compressor upgrade', value:64},
+        {label:'Off-peak scheduling', value:38} ] }
+    ],
+    reports: [
+      { type:'stat', title:'Units produced', meta:'this shift', value:1584, suffix:'', delta:'+112 vs avg shift', deltaDir:'up', series:[1390,1420,1460,1500,1530,1560,1584] },
+      { type:'stat', title:'Shift efficiency', meta:'vs target', value:96.2, suffix:'%', delta:'+1.4pt vs last shift', deltaDir:'up', series:[93.1,93.8,94.5,95.0,95.4,95.8,96.2] },
+      { type:'gauge', title:'Target attainment', value:91, display:'91%', sub:'Of shift target reached' },
+      { type:'bars', title:'Output by shift — today', meta:'units', items:[
+        {label:'A', value:1584, display:'1584'}, {label:'B', value:1490, display:'1490'}, {label:'C', value:1325, display:'1325'} ] },
+      { type:'tablecard', title:'Shift report log', meta:'live', cols:['Shift','Output','Efficiency','Supervisor'],
+        rows:[
+          ['A (06:00)','1584 u','96.2%','<span class="status-pill ok">On target</span>'],
+          ['B (14:00)','1490 u','93.8%','<span class="status-pill ok">On target</span>'],
+          ['C (22:00)','1325 u','88.1%','<span class="status-pill warn">Below target</span>'] ] }
+    ],
+    compliance: [
+      { type:'stat', title:'Safety incidents', meta:'30-day', value:0, suffix:'', delta:'0 recordable', deltaDir:'up', series:[2,1,1,1,0,0,0] },
+      { type:'stat', title:'Audit pass rate', meta:'quarterly', value:97, suffix:'%', delta:'+1pt vs last quarter', deltaDir:'up', series:[93,94,95,95,96,96,97] },
+      { type:'gauge', title:'Training completion', value:89, display:'89%', sub:'Of required modules' },
+      { type:'donut', title:'Compliance by category', meta:'this quarter', items:[
+        {label:'Safety', value:42, display:'42%'}, {label:'Quality', value:28, display:'28%'},
+        {label:'Environmental', value:18, display:'18%'}, {label:'Equipment', value:12, display:'12%'} ] },
+      { type:'tablecard', title:'Recent audits', meta:'live', cols:['Date','Area','Result','Auditor'],
+        rows:[
+          ['02 Sep','Line 04 safety','<span class="status-pill ok">Pass</span>','A. Kessler'],
+          ['28 Aug','Quality — Assembly','<span class="status-pill ok">Pass</span>','M. Osei'],
+          ['21 Aug','Environmental','<span class="status-pill warn">Review</span>','R. Fenn'],
+          ['14 Aug','Equipment safety','<span class="status-pill ok">Pass</span>','A. Kessler'] ] },
+      { type:'stat', title:'Open corrective actions', meta:'live', value:5, suffix:'', delta:'-2 vs last month', deltaDir:'up', series:[9,8,8,7,6,5,5] },
+      { type:'timeline', title:'Upcoming audits', meta:'next 30 days', items:[
+        {time:'18 Sep', label:'Environmental — Plant 02, follow-up review', state:'active'},
+        {time:'25 Sep', label:'ISO 27001 — annual surveillance audit', state:'pending'},
+        {time:'02 Oct', label:'Equipment safety — Line 03 & 05', state:'pending'},
+        {time:'14 Oct', label:'Quality — supplier audit, Assembly', state:'pending'} ] },
+      { type:'progress', title:'Certification renewals', meta:'status', items:[
+        {label:'ISO 27001', value:82}, {label:'SOC 2 Type II', value:64},
+        {label:'ISO 9001 — Quality', value:95}, {label:'OHSAS 18001 — Safety', value:40} ] }
+    ]
+  }
+};
+</script>
+<script src="assets/dashboard.js"></script>
+<script src="assets/dashboard-fx.js"></script>
+<script>
+(function(){
+  // ---- Logged-in identity: show only the real signed-in name/email, never a placeholder person ----
+  var email = localStorage.getItem('stackly_user_email');
+  var displayName = email || 'Guest';
+  var initials = email ? email.slice(0,2).toUpperCase() : 'G';
+  var topbarName = document.getElementById('topbarName');
+  var topbarAvatar = document.getElementById('topbarAvatar');
+  var sidebarName = document.getElementById('sidebarUserName');
+  var sidebarAvatar = document.getElementById('sidebarAvatar');
+  if(topbarName) topbarName.textContent = displayName;
+  if(topbarAvatar) topbarAvatar.textContent = initials;
+  if(sidebarName) sidebarName.textContent = displayName;
+  if(sidebarAvatar) sidebarAvatar.textContent = initials;
+
+  // ---- Logo stays on the dashboard while signed in: reload in place, never leave to the main site ----
+  var logo = document.getElementById('sidebarLogo');
+  if(logo){
+    logo.addEventListener('click', function(e){
+      e.preventDefault();
+      window.location.reload();
+    });
+  }
+
+  // ---- Logout is the only action that sends the visitor back to the main site ----
+  // Wired to every logout control (topbar + sidebar/mobile drawer), not just one.
+  var logoutBtns = document.querySelectorAll('.js-logout');
+  logoutBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      logoutBtns.forEach(function(b){
+        b.classList.add('logging-out');
+        var lbl = b.querySelector('span');
+        if(lbl) lbl.textContent = 'Logging out…';
+      });
+      try{ localStorage.removeItem('stackly_user_email'); }catch(err){}
+      setTimeout(function(){ window.location.assign('index.html'); }, 500);
+    });
+  });
+})();
+</script>
+</body>
+</html>
