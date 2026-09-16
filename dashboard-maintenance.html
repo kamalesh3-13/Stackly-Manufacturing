@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Stackly — Maintenance Intelligence</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="stylesheet" href="assets/dashboard.css">
+<link rel="stylesheet" href="assets/dashboard-maintenance-theme.css">
+</head>
+<body>
+
+<div class="sidebar-scrim" id="sidebarScrim"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <a class="sidebar-logo" href="index.html" id="sidebarLogo"><img src="assets/logo.webp" alt="Stackly" width="120" height="36"></a>
+  </div>
+  <!-- nav injected by dashboard.js -->
+  <div class="sidebar-foot">
+    <div class="sidebar-user">
+      <div class="u-avatar" id="sidebarAvatar">DO</div>
+      <div><div class="u-name" id="sidebarUserName">Daniel Okafor</div><div class="u-role">Head of Maintenance</div></div>
+    </div>
+    <button class="sidebar-logout js-logout" type="button">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      <span>Log Out</span>
+    </button>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <img class="topbar-logo" src="assets/logo.webp" alt="Stackly" width="96" height="29">
+      </div>
+      <div class="topbar-title">
+        <h1 id="sectionTitle">Overview</h1>
+        <p id="sectionSub">Maintenance Intelligence</p>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-user">
+          <div class="topbar-avatar" id="topbarAvatar">DO</div>
+          <div class="topbar-user-text"><span class="tw-hello">Welcome back</span><span class="tw-name" id="topbarName">Daniel Okafor</span></div>
+        </div>
+        <button class="menu-toggle" type="button"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.6"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div id="section-root"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.STACKLY_CONFIG = {
+  title: "Stackly — Maintenance Intelligence",
+  subtitle: "Maintenance Intelligence",
+  menus: [
+    { id:'overview', label:'Overview', icon:'overview' },
+    { id:'assets', label:'Assets', icon:'asset', count:342 },
+    { id:'workorders', label:'Work Orders', icon:'order', count:27 },
+    { id:'predictive', label:'Predictive Alerts', icon:'alert', count:9 },
+    { id:'inventory', label:'Inventory', icon:'box' },
+    { id:'schedule', label:'Maintenance Schedule', icon:'calendar', count:6 },
+    { id:'team', label:'Team', icon:'users' }
+  ],
+  data: {
+    overview: [
+      { type:'stat', title:'Asset health score', meta:'fleet avg', value:91, suffix:'', delta:'+2 vs last month', deltaDir:'up', series:[86,87,88,89,89,90,91] },
+      { type:'stat', title:'Fleet uptime', meta:'30-day', value:96.8, suffix:'%', delta:'+1.1pt vs target', deltaDir:'up', series:[95.0,95.4,95.8,96.1,96.3,96.6,96.8] },
+      { type:'gauge', title:'PM completion', value:88, display:'88%', sub:'Scheduled this week' },
+      { type:'stat', title:'Predicted failures', meta:'next 7 days', value:4, suffix:'', delta:'2 high-confidence', deltaDir:'down', series:[6,6,5,5,4,4,4] },
+      { type:'trend', title:'Predicted failure risk', meta:'model score, 7-day', series:[3.1,3.4,3.0,3.6,3.2,2.9,2.7], labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'] },
+      { type:'donut', title:'Risk by asset class', meta:'this week', items:[
+        {label:'Motors', value:38, display:'38%'}, {label:'Bearings', value:29, display:'29%'},
+        {label:'Conveyors', value:19, display:'19%'}, {label:'Pumps', value:14, display:'14%'} ] },
+      { type:'alerts', title:'Predictive alerts', meta:'live', items:[
+        {level:'crit', text:'Asset 27 — bearing degradation, inspect within 48h', time:'12 min ago'},
+        {level:'warn', text:'Asset 14 — vibration trending above baseline', time:'1 hr ago'},
+        {level:'info', text:'Asset 09 — sensor recalibrated successfully', time:'3 hr ago'} ] }
+    ],
+    assets: [
+      { type:'stat', title:'Assets monitored', meta:'fleet-wide', value:342, suffix:'', delta:'+18 this quarter', deltaDir:'up', series:[300,310,318,325,330,336,342] },
+      { type:'stat', title:'Asset 27 health', meta:'critical watch', value:64, suffix:'%', delta:'-9pt this week', deltaDir:'down', series:[80,77,74,71,68,66,64] },
+      { type:'gauge', title:'Sensor coverage', value:91, display:'91%', sub:'Of critical assets' },
+      { type:'stat', title:'Avg asset age', meta:'fleet', value:6.4, suffix:'y', delta:'+0.2y vs last year', deltaDir:'down', series:[6.0,6.1,6.1,6.2,6.3,6.3,6.4] },
+      { type:'heatstrip', title:'Asset 27 — vibration index', meta:'mm/s, 7-day', items:[
+        {label:'Mon', value:57}, {label:'Tue', value:62}, {label:'Wed', value:70},
+        {label:'Thu', value:76}, {label:'Fri', value:84}, {label:'Sat', value:92}, {label:'Sun', value:100} ] },
+      { type:'donut', title:'Assets by risk tier', meta:'live', items:[
+        {label:'Low risk', value:268, display:'268'}, {label:'Medium risk', value:57, display:'57'},
+        {label:'High risk', value:17, display:'17'} ] },
+      { type:'tablecard', title:'Asset registry', meta:'live', cols:['ID','Line','Health','Last service'],
+        rows:[
+          ['Asset 04','Line 01','<span class="status-pill ok">94%</span>','12 Aug'],
+          ['Asset 14','Line 02','<span class="status-pill warn">71%</span>','03 Jul'],
+          ['Asset 27','Line 04','<span class="status-pill crit">64%</span>','19 Jun'],
+          ['Asset 31','Line 03','<span class="status-pill ok">89%</span>','28 Aug'] ] }
+    ],
+    workorders: [
+      { type:'stat', title:'Open work orders', meta:'live', value:27, suffix:'', delta:'6 overdue', deltaDir:'down', series:[31,30,29,28,27,28,27] },
+      { type:'stat', title:'On-time completion', meta:'30-day', value:88, suffix:'%', delta:'+3pt vs last month', deltaDir:'up', series:[82,83,84,85,86,87,88] },
+      { type:'gauge', title:'Closed this week', value:19, display:'19', sub:'Of 25 scheduled' },
+      { type:'stat', title:'Avg resolution time', meta:'this month', value:5.2, suffix:'h', delta:'-0.8h vs baseline', deltaDir:'up', series:[6.4,6.1,5.9,5.7,5.5,5.3,5.2] },
+      { type:'bars', title:'Work orders closed — 7 days', meta:'count', items:[
+        {label:'Mon', value:3, display:'3'}, {label:'Tue', value:5, display:'5'},
+        {label:'Wed', value:4, display:'4'}, {label:'Thu', value:6, display:'6'},
+        {label:'Fri', value:5, display:'5'}, {label:'Sat', value:7, display:'7'}, {label:'Sun', value:6, display:'6'} ] },
+      { type:'timeline', title:'Next up in queue', meta:'by priority', items:[
+        {time:'Now', label:'WO-1188 — Asset 27, critical', state:'active'},
+        {time:'Next', label:'WO-1189 — Line 05 conveyor, high', state:'pending'},
+        {time:'Then', label:'WO-1190 — Asset 14, high', state:'pending'},
+        {time:'Queued', label:'WO-1191 — Asset 09, medium', state:'pending'} ] },
+      { type:'tablecard', title:'Work order queue', meta:'live', cols:['WO #','Asset','Priority','Assigned'],
+        rows:[
+          ['WO-1188','Asset 27','<span class="status-pill crit">Critical</span>','R. Fenn'],
+          ['WO-1189','Line 05 conveyor','<span class="status-pill warn">High</span>','M. Osei'],
+          ['WO-1190','Asset 14','<span class="status-pill warn">High</span>','A. Kessler'],
+          ['WO-1191','Asset 09','<span class="status-pill ok">Medium</span>','Unassigned'] ] }
+    ],
+    predictive: [
+      { type:'stat', title:'Active alerts', meta:'live', value:9, suffix:'', delta:'3 critical', deltaDir:'down', series:[13,12,11,10,10,9,9] },
+      { type:'stat', title:'Model confidence', meta:'avg', value:92, suffix:'%', delta:'+1.5pt this month', deltaDir:'up', series:[88,89,90,90,91,91,92] },
+      { type:'gauge', title:'Resolved this week', value:71, display:'71%', sub:'Of alerts actioned' },
+      { type:'stat', title:'False positive rate', meta:'30-day', value:4.1, suffix:'%', delta:'-0.6pt vs last month', deltaDir:'up', series:[5.4,5.1,4.8,4.6,4.4,4.2,4.1] },
+      { type:'metrics', title:'Alert model breakdown', meta:'this week', items:[
+        {label:'Alert volume', value:74, delta:'across 7 days', deltaDir:'down'},
+        {label:'Model confidence', value:92, suffix:'%', delta:'+1.5pt', deltaDir:'up'},
+        {label:'False positive rate', value:4.1, suffix:'%', delta:'-0.6pt', deltaDir:'up'},
+        {label:'Resolved this week', value:71, suffix:'%', delta:'of alerts actioned', deltaDir:'up'} ] },
+      { type:'rank', title:'Alerts by asset class', meta:'this week', items:[
+        {label:'Motors', value:12, display:'12'}, {label:'Bearings', value:9, display:'9'},
+        {label:'Conveyors', value:5, display:'5'}, {label:'Pumps', value:3, display:'3'} ] },
+      { type:'tablecard', title:'Alert log', meta:'live', cols:['Asset','Signal','Confidence','Action'],
+        rows:[
+          ['Asset 27','Vibration +38%','<span class="status-pill crit">96%</span>','Inspect bearing'],
+          ['Asset 14','Temp +12%','<span class="status-pill warn">83%</span>','Monitor'],
+          ['Asset 09','Current draw +6%','<span class="status-pill ok">67%</span>','Log only'] ] }
+    ],
+    inventory: [
+      { type:'stat', title:'Parts in stock', meta:'SKUs', value:1284, suffix:'', delta:'22 below reorder pt', deltaDir:'down', series:[1240,1255,1260,1270,1275,1280,1284] },
+      { type:'stat', title:'Fill rate', meta:'30-day', value:94, suffix:'%', delta:'+1.2pt vs last month', deltaDir:'up', series:[91,91.5,92,92.5,93,93.5,94] },
+      { type:'gauge', title:'Critical parts covered', value:97, display:'97%', sub:'Of critical SKUs stocked' },
+      { type:'stat', title:'Stockouts', meta:'7-day', value:3, suffix:'', delta:'-2 vs last week', deltaDir:'up', series:[7,6,5,5,4,3,3] },
+      { type:'tablecard', title:'Reorder queue', meta:'live', cols:['SKU','In stock','Reorder pt.','Status'],
+        rows:[
+          ['Bearing 6205-2RS','4','15','<span class="status-pill crit">Order now</span>'],
+          ['Drive belt B42','6','12','<span class="status-pill warn">Low</span>'],
+          ['Filter element F-12','9','10','<span class="status-pill warn">Low</span>'],
+          ['Sensor SEN-09','34','20','<span class="status-pill ok">OK</span>'] ] },
+      { type:'donut', title:'Stock by category', meta:'1,284 SKUs', items:[
+        {label:'Bearings', value:412, display:'412'}, {label:'Sensors', value:298, display:'298'},
+        {label:'Belts', value:266, display:'266'}, {label:'Filters', value:308, display:'308'} ] },
+      { type:'rank', title:'Low stock parts', meta:'below reorder point', items:[
+        {label:'Bearing 6205-2RS', value:4, display:'4 left'}, {label:'Drive belt B42', value:6, display:'6 left'},
+        {label:'Filter element F-12', value:9, display:'9 left'} ] },
+      { type:'progress', title:'Incoming shipments', meta:'status', items:[
+        {label:'Bearings — 200 units', value:80}, {label:'Sensors — 60 units', value:45},
+        {label:'Belts — 120 units', value:20} ] }
+    ],
+    schedule: [
+      { type:'stat', title:'Upcoming PM tasks', meta:'next 7 days', value:34, suffix:'', delta:'+4 vs last week', deltaDir:'down', series:[26,28,29,30,31,33,34] },
+      { type:'stat', title:'Avg lead time', meta:'scheduling', value:3.2, suffix:'d', delta:'-0.4d vs baseline', deltaDir:'up', series:[4.1,3.9,3.7,3.6,3.4,3.3,3.2] },
+      { type:'gauge', title:'Schedule adherence', value:93, display:'93%', sub:'On-time task starts' },
+      { type:'timeline', title:'This week\'s schedule', meta:'by day', items:[
+        {time:'Mon', label:'Line 02 conveyor — lubrication round', state:'done'},
+        {time:'Wed', label:'Asset 27 — bearing inspection', state:'active'},
+        {time:'Thu', label:'Line 04 — quarterly motor service', state:'pending'},
+        {time:'Fri', label:'Line 01 — filter replacement', state:'pending'} ] },
+      { type:'tablecard', title:'Scheduled maintenance', meta:'live', cols:['Asset','Task','Date','Technician'],
+        rows:[
+          ['Asset 27','Bearing inspection','Wed, 11 Sep','R. Fenn'],
+          ['Line 04 motor','Quarterly service','Thu, 12 Sep','M. Osei'],
+          ['Line 01 filter','Filter replacement','Fri, 13 Sep','A. Kessler'],
+          ['Asset 09','Sensor recheck','Mon, 16 Sep','Unassigned'] ] },
+      { type:'metrics', title:'Schedule breakdown', meta:'this week', items:[
+        {label:'Preventive tasks', value:26, delta:'planned this week', deltaDir:'up'},
+        {label:'Predictive tasks', value:8, delta:'flagged by model', deltaDir:'down'},
+        {label:'Emergency tasks', value:2, delta:'unplanned', deltaDir:'down'},
+        {label:'Completed on time', value:93, suffix:'%', delta:'+2pt vs last week', deltaDir:'up'} ] },
+      { type:'bars', title:'PM tasks completed — 7 days', meta:'count', items:[
+        {label:'Mon', value:5, display:'5'}, {label:'Tue', value:6, display:'6'},
+        {label:'Wed', value:4, display:'4'}, {label:'Thu', value:7, display:'7'},
+        {label:'Fri', value:6, display:'6'}, {label:'Sat', value:3, display:'3'}, {label:'Sun', value:2, display:'2'} ] },
+      { type:'rank', title:'Tasks by technician', meta:'this week', items:[
+        {label:'R. Fenn', value:9, display:'9'}, {label:'M. Osei', value:8, display:'8'},
+        {label:'A. Kessler', value:6, display:'6'}, {label:'J. Diallo', value:4, display:'4'} ] }
+    ],
+    team: [
+      { type:'stat', title:'Technicians on shift', meta:'today', value:14, suffix:'', delta:'+2 vs yesterday', deltaDir:'up', series:[11,12,12,13,12,13,14] },
+      { type:'stat', title:'Avg response time', meta:'critical alerts', value:18, suffix:'m', delta:'-3m vs last month', deltaDir:'up', series:[24,23,22,21,20,19,18] },
+      { type:'gauge', title:'Utilization', value:82, display:'82%', sub:'Of scheduled hours' },
+      { type:'rank', title:'Work orders closed — by technician', meta:'this week', items:[
+        {label:'R. Fenn', value:11, display:'11'}, {label:'M. Osei', value:9, display:'9'},
+        {label:'A. Kessler', value:7, display:'7'}, {label:'J. Diallo', value:5, display:'5'} ] },
+      { type:'tablecard', title:'Team roster', meta:'live', cols:['Technician','Role','Assigned WOs','Status'],
+        rows:[
+          ['R. Fenn','Senior Technician','4','<span class="status-pill ok">On shift</span>'],
+          ['M. Osei','Technician','3','<span class="status-pill ok">On shift</span>'],
+          ['A. Kessler','Technician','2','<span class="status-pill warn">On call</span>'],
+          ['J. Diallo','Junior Technician','1','<span class="status-pill ok">On shift</span>'] ] },
+      { type:'donut', title:'Team by shift', meta:'today', items:[
+        {label:'Shift A (06:00)', value:6, display:'6'}, {label:'Shift B (14:00)', value:5, display:'5'},
+        {label:'Shift C (22:00)', value:3, display:'3'} ] },
+      { type:'progress', title:'Certification & training', meta:'team-wide', items:[
+        {label:'Confined space entry', value:100}, {label:'Electrical safety — Tier 2', value:78},
+        {label:'Predictive tools onboarding', value:56} ] },
+      { type:'timeline', title:'Upcoming shift changes', meta:'this week', items:[
+        {time:'Mon', label:'A. Kessler — moves to Shift B', state:'pending'},
+        {time:'Wed', label:'J. Diallo — completes onboarding, joins Shift A', state:'pending'},
+        {time:'Fri', label:'R. Fenn — on-call coverage begins', state:'pending'} ] }
+    ]
+  }
+};
+</script>
+<script src="assets/dashboard.js"></script>
+<script src="assets/dashboard-fx.js"></script>
+<script>
+(function(){
+  // ---- Logged-in identity: show only the real signed-in name/email, never a placeholder person ----
+  var email = localStorage.getItem('stackly_user_email');
+  var displayName = email || 'Guest';
+  var initials = email ? email.slice(0,2).toUpperCase() : 'G';
+  var topbarName = document.getElementById('topbarName');
+  var topbarAvatar = document.getElementById('topbarAvatar');
+  var sidebarName = document.getElementById('sidebarUserName');
+  var sidebarAvatar = document.getElementById('sidebarAvatar');
+  if(topbarName) topbarName.textContent = displayName;
+  if(topbarAvatar) topbarAvatar.textContent = initials;
+  if(sidebarName) sidebarName.textContent = displayName;
+  if(sidebarAvatar) sidebarAvatar.textContent = initials;
+
+  // ---- Logo stays on the dashboard while signed in: reload in place, never leave to the main site ----
+  var logo = document.getElementById('sidebarLogo');
+  if(logo){
+    logo.addEventListener('click', function(e){
+      e.preventDefault();
+      window.location.reload();
+    });
+  }
+
+  // ---- Logout is the only action that sends the visitor back to the main site ----
+  // Wired to every logout control (topbar + sidebar/mobile drawer), not just one.
+  var logoutBtns = document.querySelectorAll('.js-logout');
+  logoutBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      logoutBtns.forEach(function(b){
+        b.classList.add('logging-out');
+        var lbl = b.querySelector('span');
+        if(lbl) lbl.textContent = 'Logging out…';
+      });
+      try{ localStorage.removeItem('stackly_user_email'); }catch(err){}
+      setTimeout(function(){ window.location.assign('index.html'); }, 500);
+    });
+  });
+})();
+</script>
+</body>
+</html>
